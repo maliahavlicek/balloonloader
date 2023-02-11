@@ -1,1 +1,1 @@
-web: gunicorn balloonloader.wsgi.application
+web: gunicorn balloonloader.wsgi
