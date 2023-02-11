@@ -47,10 +47,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
 
 ]
 
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 REZFLOW_API_KEY = os.environ.get("REZFLOW_API_KEY")
 
 MIDDLEWARE = [
