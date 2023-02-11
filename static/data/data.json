@@ -1,0 +1,234 @@
+[
+  {
+    "last_name": "Havlicek",
+    "first_name": "Malia",
+    "weight": 195,
+    "age": 48,
+    "waiver": true,
+    "group": 1
+  },
+  {
+    "last_name": "Gjerapic",
+    "first_name": "Gordan",
+    "weight": 192,
+    "age": 50,
+    "waiver": true,
+    "group": 1
+  },
+  {
+    "last_name": "Gjerapic",
+    "first_name": "Marko",
+    "weight": 122,
+    "age": 16,
+    "waiver": true,
+    "group": 1
+  },
+  {
+    "last_name": "Gjerapic",
+    "first_name": "Matija",
+    "weight": 92,
+    "age": 14,
+    "waiver": true,
+    "group": 1
+  },
+  {
+    "last_name": "Gjerapic",
+    "first_name": "Karl",
+    "weight": 178,
+    "age": 21,
+    "waiver": true,
+    "group": 1
+  },
+  {
+    "last_name": "Gjerapic",
+    "first_name": "Ilija",
+    "weight": 140,
+    "age": 20,
+    "waiver": true,
+    "group": 1
+  },
+  {
+    "last_name": "Quandt",
+    "first_name": "Illya",
+    "weight": 203,
+    "age": 52,
+    "waiver": true,
+    "group": 2
+  },
+  {
+    "last_name": "Havlicek",
+    "first_name": "Lani",
+    "weight": 119,
+    "age": 50,
+    "waiver": true,
+    "group": 2
+  },
+  {
+    "last_name": "Quandt",
+    "first_name": "Alden",
+    "weight": 132,
+    "age": 18,
+    "waiver": true,
+    "group": 2
+  },
+  {
+    "last_name": "Smith",
+    "first_name": "John",
+    "weight": 338,
+    "age": 565,
+    "waiver": false,
+    "group": 3
+  },
+  {
+    "last_name": "Smith",
+    "first_name": "Wanda",
+    "weight": 257,
+    "age": 60,
+    "waiver": true,
+    "group": 3
+  },
+  {
+    "last_name": "Jones",
+    "first_name": "Bobby",
+    "weight": 333,
+    "age": 58,
+    "waiver": false,
+    "group": 4
+  },
+  {
+    "last_name": "Simpson",
+    "first_name": "Homer",
+    "weight": 268,
+    "age": 42,
+    "waiver": false,
+    "group": 5
+  },
+  {
+    "last_name": "Simpson",
+    "first_name": "Maggie",
+    "weight": 17,
+    "age": 1,
+    "waiver": false,
+    "group": 5
+  },
+  {
+    "last_name": "Simpson",
+    "first_name": "Marge",
+    "weight": 122,
+    "age": 32,
+    "waiver": false,
+    "group": 5
+  },
+  {
+    "last_name": "Simpson",
+    "first_name": "Lisa",
+    "weight": 42,
+    "age": 7,
+    "waiver": false,
+    "group": 5
+  },
+  {
+    "last_name": "Simpson",
+    "first_name": "Bart",
+    "weight": 50,
+    "age": 6,
+    "waiver": false,
+    "group": 5
+  },
+  {
+    "last_name": "Janes",
+    "first_name": "Rich",
+    "weight": 142,
+    "age": 48,
+    "waiver": false,
+    "group": 6
+  },
+  {
+    "last_name": "Jaimie",
+    "first_name": "Rich",
+    "weight": 110,
+    "age": 46,
+    "waiver": false,
+    "group": 6
+  },
+  {
+    "last_name": "Janes",
+    "first_name": "Jaimie",
+    "weight": 110,
+    "age": 46,
+    "waiver": false,
+    "group": 6
+  },
+  {
+    "last_name": "Janes",
+    "first_name": "Brady",
+    "weight": 107,
+    "age": 15,
+    "waiver": false,
+    "group": 6
+  },
+  {
+    "last_name": "Janes",
+    "first_name": "Natalia",
+    "weight": 90,
+    "age": 11,
+    "waiver": false,
+    "group": 6
+  },
+  {
+    "last_name": "Flintstone",
+    "first_name": "Fred",
+    "weight": 350,
+    "age": 41,
+    "waiver": false,
+    "group": 7
+  },
+  {
+    "last_name": "Flintstone",
+    "first_name": "Wilma",
+    "weight": 105,
+    "age":38,
+    "waiver": false,
+    "group": 7
+  },
+  {
+    "last_name": "Flintstone",
+    "first_name": "Bambam",
+    "weight": 30,
+    "age":3,
+    "waiver": false,
+    "group": 7
+  },
+  {
+    "last_name": "Flintstone",
+    "first_name": "Pebbles",
+    "weight": 22,
+    "age":2,
+    "waiver": false,
+    "group": 7
+  },
+  {
+    "last_name": "Rubble",
+    "first_name": "Barney",
+    "weight": 125,
+    "age":39,
+    "waiver": false,
+    "group": 7
+  },
+  {
+    "last_name": "Rubble",
+    "first_name": "Betty",
+    "weight": 121,
+    "age":38,
+    "waiver": false,
+    "group": 7
+  },
+  {
+    "last_name": "Slate",
+    "first_name": "Mister",
+    "weight": 171,
+    "age":58,
+    "waiver": false,
+    "group": 7
+  }
+]

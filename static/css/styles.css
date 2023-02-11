@@ -1,0 +1,417 @@
+:root {
+    --translateX: 0;
+    --translateY: 0;
+}
+
+html {
+    font-size: 10px; /* this makes it so we can do rem math easily*/
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.fs-1 {
+    font-size: 2.6rem !important;
+    line-height: 2.8rem !important;
+}
+
+.fs-2 {
+    font-size: 2.4rem !important;
+    line-height: 2.8rem !important;
+}
+
+.fs-3 {
+    font-size: 1.8rem !important;
+    line-height: 2.2rem !important;
+}
+
+.fs-4 {
+    font-size: 1.4rem !important;
+    line-height: 1.8rem !important;
+}
+
+.flights {
+    order: 2;
+}
+
+.border {
+    border-color: black !important;
+}
+
+.flight-label {
+    position: relative;
+    top: -2.4rem;
+    text-align: left;
+    width: 100%;
+}
+
+.people-summary {
+    background: lightgoldenrodyellow;
+}
+
+.flight {
+    border: 1px solid black;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(4rem, 1fr)) 80px;
+    grid-auto-rows: minmax(30px, auto);
+}
+
+.flight-summary, .people-summary, .flights-summary {
+    display: grid;
+    grid-template-columns:repeat(2, minmax(4rem, 1fr)) 80px;
+    grid-auto-rows: minmax(30px, auto);
+}
+
+.flight .flight-summary {
+    background: palegoldenrod;
+}
+
+.flights-summary {
+    grid-template-columns: 100px;
+}
+
+.grand-totals {
+    display: grid;
+    grid-template-columns: auto 80px;
+    background: mediumturquoise;
+}
+
+.diff-weight {
+    color: red;
+}
+
+.grand-totals:before {
+    content: 'GRAND TOTALS';
+    font-size: 16px;
+    border: none;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+.flights-summary.counts {
+    background: paleturquoise;
+}
+
+.flights .left.drop-targets, .flights .right.drop-targets {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+}
+
+.full-row {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+aside {
+    order: 1;
+}
+
+.drop-targets {
+    min-height: 100px;
+    border: 1px solid black;
+    margin: 0.8rem;
+    padding: 3rem 0.8rem;
+    background: #ffffff;
+}
+
+.names {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+
+.hovered {
+    background: #f4f4f4;
+    border-style: dashed;
+}
+
+.person-item {
+    padding-left: 0.4rem;
+    display: block;
+    height: 24px;
+}
+
+.weight + .person-item {
+    padding-left: 0.8rem;
+}
+
+
+.group-name {
+    font-size: 1.8rem;
+    margin: 0.2rem auto;
+    text-align: left;
+    display: block;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.flight .group-name {
+    width: max-content;
+    text-align: center;
+}
+
+/* suppress input spinner in UI */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.group .weight, .circleText {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 22px;
+    color: #fff;
+    line-height: 42px;
+    text-align: center;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -4px;
+}
+.weight.group-weight {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+
+}
+.group.person .weight {
+    display: flex;
+    min-width: 45px;
+    width: max-content;
+    height: auto;
+    font-size: 18px;
+    line-height: 20px;
+    background: #052A90FF;
+    border-radius: 0;
+    margin: -0.4rem;
+    padding: 0.2rem;
+    border: 1px solid white;
+    align-text: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+}
+
+.group {
+    display: flex;
+    background: #eae4e9ff;
+    border: 1px solid black;
+    padding: 0.4rem;
+    transform: translate(calc(var(--translateX) * 1px), calc(var(--translateY) * 1px));
+    overflow: hidden;
+    -webkit-transform-style: preserve-3d;
+    position: relative;
+    max-width: 130px;
+}
+
+.details .group {
+    margin: 0 1rem;
+    border-bottom: none;
+}
+
+.group-details .weight {
+    align-self: center;
+}
+
+.details .group:last-child {
+    border-bottom: 1px solid black;
+}
+
+.group.hold {
+    border: solid 5px #ccc;
+    opacity: 0.75;
+}
+
+.group-1 {
+    background: #eae4e9ff;
+}
+
+.group-2 {
+    background: #dfe7fdff;
+}
+
+.group-3 {
+    background: #fde2e4ff;
+}
+
+.group-4 {
+    background: #fad2e1ff;
+}
+
+.group-5 {
+    background: #e2ece9ff;
+}
+
+.group-6 {
+    background: #cff2f7;
+}
+
+.group-7 {
+    background: #f0efebff;
+}
+
+.group-8 {
+    background: #fff1e6ff;
+}
+
+.group-9 {
+    background: #cddafd69;
+}
+
+.group-10 {
+    background: #dfd7fcff;
+}
+
+.group-11 {
+    background: #f8b4c4ff;
+}
+
+.group-12 {
+    background: #ffedc2ff;
+}
+
+.group-13 {
+    background: #60fbd2ff;
+}
+
+.group-14 {
+    background: #7cd5f3ff;
+}
+
+.group-15 {
+    background: #8fdbf5ff;
+}
+
+.group-16 {
+    background: #3dccc7ff;
+}
+
+.group-17 {
+    background: #0044f95e;
+}
+
+.group-18 {
+    background: #d400f95e;
+}
+
+.group-19 {
+    background: #ffdcbc;
+}
+
+.group-20 {
+    background: #eaffbc;
+}
+
+
+#weights-html {
+    display: grid;
+    grid-template-columns: 100px 60px;
+    max-width: 80%;
+}
+
+#weights-html div {
+    height: 34px;
+    font-size: 16px;
+    padding: 1px 0;
+}
+
+a.weight-remove {
+    color: darkred !important;
+    cursor: pointer;
+    border-bottom: 0;
+    max-width: 100%;
+}
+
+.btn, a.btn {
+    text-transform: uppercase;
+}
+
+input, select, textarea {
+    border: 1px solid #dcdcdd;
+    color: #1C1D20;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    width: 100%;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    letter-spacing: 0.3px;
+    line-height: 1.8rem;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+
+@media screen and (min-width: 768px) {
+    .flight {
+        grid-template-columns: repeat(2, minmax(4rem, 1fr)) 100px;
+    }
+    .flight-summary, .people-summary, .flights-summary {
+        grid-template-columns:repeat(2, minmax(4rem, 1fr)) 100px;
+    }
+    .grand-totals {
+        grid-template-columns: auto 100px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .my-2 {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .px-2 {
+        padding-right: 0.5rem !important;
+        padding-left: 0.5rem !important;
+    }
+
+    .flights {
+        order: 1;
+    }
+
+
+    .flight-label {
+        top: -0.8rem;
+    }
+
+    .names {
+        text-align: left;
+        margin: 2rem;
+    }
+
+    aside.column {
+        max-width: 35vw;
+        width: 35vw;
+        order: 2;
+    }
+
+    .drop-targets {
+        padding: 0.8rem 0.8rem 3rem;
+    }
+
+}
+
+
+.hide {
+    display: none !important;
+}

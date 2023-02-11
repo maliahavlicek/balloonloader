@@ -1,0 +1,122 @@
+{
+  "date": "09/10/2022",
+  "groups": [
+  {
+    "last_name": "Havlicek",
+    "first_name": "Malia",
+    "phone" : "7202381708",
+    "members": [
+      {
+        "last_name": "Havlicek",
+        "first_name": "Malia",
+        "weight": 195,
+        "age": 48,
+        "waiver": true
+      },{
+        "last_name": "Gjerapic",
+        "first_name": "Gordan",
+        "weight": 192,
+        "age": 50,
+        "waiver": true
+
+      },{
+        "last_name": "Gjerapic",
+        "first_name": "Marko",
+        "weight": 122,
+        "age": 16,
+        "waiver": true
+
+      },{
+        "last_name": "Gjerapic",
+        "first_name": "Matija",
+        "weight": 92,
+        "age": 14,
+        "waiver": true
+
+      },{
+        "last_name": "Gjerapic",
+        "first_name": "Karl",
+        "weight": 178,
+        "age": 21,
+        "waiver": true
+
+      },{
+        "last_name": "Gjerapic",
+        "first_name": "Ilija",
+        "weight": 140,
+        "age": 20,
+        "waiver": true
+
+      }
+    ]
+
+
+  }, {
+    "last_name": "Quandt",
+    "first_name": "Illya",
+    "phone" : "7753380813",
+    "members": [
+      {
+    "last_name": "Quandt",
+    "first_name": "Illya",
+        "weight": 203,
+        "age": 52,
+        "waiver": true
+      },{
+        "last_name": "Havlicek",
+        "first_name": "Lani",
+        "weight": 119,
+        "age": 50,
+        "waiver": true
+
+      },{
+        "last_name": "Quandt",
+        "first_name": "Alden",
+        "weight": 132,
+        "age": 18,
+        "waiver": true
+
+      }
+    ]
+
+
+  }, {
+    "last_name": "Smith",
+    "first_name": "John",
+    "phone" : "8057286393",
+    "members": [
+      {
+    "last_name": "Smith",
+    "first_name": "John",
+        "weight": 338,
+        "age": 565,
+        "waiver": false
+      },{
+        "last_name": "Smith",
+        "first_name": "Wanda",
+        "weight": 257,
+        "age": 60,
+        "waiver": true
+
+      },
+    ]
+
+
+  }, {
+    "last_name": "Jones",
+    "first_name": "Bobby",
+    "phone" : "3034716393",
+    "members": [
+      {
+    "last_name": "Jones",
+    "first_name": "Bobby",
+        "weight": 333,
+        "age": 58,
+        "waiver": false
+      }
+    ]
+
+
+  }
+            ]
+}

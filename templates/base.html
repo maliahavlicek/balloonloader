@@ -1,0 +1,60 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Balloon Loading Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- bootstrap styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- fontawesome icons -->
+    <script src="https://kit.fontawesome.com/e5fb00b6b9.js" crossorigin="anonymous"></script>
+    <!-- own styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/globals.css' %}" type="text/x-scss">
+    <meta name="description"
+          content="Balloon Loader helps automate weight distribution for loading hot air balloon rides based on customer's weights and booked groups of customers">
+    <!--  Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+</head>
+<body>
+<header>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed">
+        <div class="container container-fluid">
+            <!-- Logo -->
+            <h1 class="mx-auto">BALLOON LOAD CALCULATOR</h1>
+            <div class="d-flex">
+                <a class=" btn btn-sm btn-warning" aria-current="page" href="{% url 'home' %}">Start Over</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- Main content -->
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<!-- SCRIPT INCLUDES -->
+
+
+<script type="text/javascript" src="{% static 'javascript/modules/dataLoad.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/modules/addPatron.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/modules/optimize.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/script.js' %}"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+<footer>
+
+</footer>
+</body>
+</html>
