@@ -47,7 +47,7 @@ class Home(TemplateView):
         ]
         return context
 
-@vary_on_headers("X-Requested-With")
+
 def GetRezFlowData(request):
     """
     View get data from API vai curl
