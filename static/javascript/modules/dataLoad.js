@@ -138,7 +138,7 @@ function loadApiData(url, company, date) {
         .catch(err => {
             const errorMessage = document.querySelector('.api-error');
             errorMessage.classList.remove('hide');
-            errorMessage.innerHTML= `API ERROR: {err}`
+            errorMessage.innerHTML= `API ERROR: ${err}`
         });
 
 }
