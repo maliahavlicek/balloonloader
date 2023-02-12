@@ -113,7 +113,8 @@ function loadApiData(url, company, date) {
         headers: {
             "Content-type": "application/json",
             'X-CSRFToken': csrftoken,
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': 'XMLHttpRequest',
+            'WWW-Authenticate': 'Basic',
         },
         method: 'GET',
         credentials: 'include',
