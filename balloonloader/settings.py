@@ -32,13 +32,16 @@ if os.path.exists('env.py'):
 else:
     DEBUG = False
 
-DEBUG = False
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'balloonloader.herokuapp.com', 'balloonloader.onrender.com']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'balloonloader.herokuapp.com',
+    'balloonloader.onrender.com',
+    'res.loudinary.com'
+]
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -56,8 +59,6 @@ INSTALLED_APPS = [
     'cloudinary',
 
 ]
-
-CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 REZFLOW_API_KEY = os.environ.get("REZFLOW_API_KEY")
 
 MIDDLEWARE = [
