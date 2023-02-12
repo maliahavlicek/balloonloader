@@ -116,6 +116,7 @@ function loadApiData(url, company, date) {
             'X-Requested-With': 'XMLHttpRequest'
         },
         method: 'GET',
+        credentials: 'include',
     };
 
     fetch(api_url, options)
