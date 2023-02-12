@@ -32,6 +32,10 @@ if os.path.exists('env.py'):
 else:
     DEBUG = False
 
+DEBUG = False
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'balloonloader.herokuapp.com', 'balloonloader.onrender.com']
