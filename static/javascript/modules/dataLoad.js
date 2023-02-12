@@ -112,6 +112,7 @@ function loadApiData(url, company, date) {
     const options = {
         headers: {
             "Content-type": "application/json",
+            'X-CSRFToken': csrftoken,
             'X-Requested-With': 'XMLHttpRequest',
         },
         method: 'GET',
