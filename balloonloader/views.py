@@ -53,7 +53,7 @@ class Home(TemplateView):
 @api_view(['get'])
 def GetRezFlowData(request):
     """
-    View get data from API vai curl
+    Passenger data from rez-flow API vai curl
     """
     res_date = request.GET.get("date", None)
     company = request.GET.get("company", None)

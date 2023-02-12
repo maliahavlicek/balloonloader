@@ -53,15 +53,8 @@ function loadData() {
 
     try {
         fr.onload = e => {
-            const result = JSON.parse(e.target.result.toString());
-            const items = result.map(group => {
-                const Weights = group.guests.map(p => p.weight || 180);
-                return {
-                    Name: group.confirmation,
-                    Weights,
-                    total_weight: Weights.reduce((acc, val) => acc + val, 0),
-                };
-            });
+            const result = JSON.parse(e.target.result.toString());;
+            const items = getGuests(result) ;
             // now we can add the patrons based on this wonderful information
             createPatrons(items);
         };
@@ -119,15 +112,7 @@ function loadApiData(url, company, date) {
     fetch(api_url, options)
         .then(response => response.json())
         .then(json => {
-
-            const items = json.json.map(group => {
-                const Weights = group.guests.map(p => p.weight || 180);
-                return {
-                    Name: group.confirmation,
-                    Weights,
-                    total_weight: Weights.reduce((acc, val) => acc + val, 0),
-                };
-            });
+            const items = getGuests(json.json) ;
             // hide input buttons and show data panels
             upload.classList.add('hide');
             main.classList.remove('hide');
@@ -140,6 +125,21 @@ function loadApiData(url, company, date) {
             errorMessage.innerHTML= `API ERROR: ${err}`
         });
 
+}
+
+/** function to create passenger JSON **/
+function getGuests(data) {
+    const items = data.map(group => {
+        const Weights = group.guests.map(p => p.weight || 180);
+        const display_name = group.guests[0].name.split(" ").length > 1 ? group.guests[0].name.split(" ").at(0) + " " + group.guests[0].name.split(" ").at(-1).substring(0, 1) : group.guests[0].name;
+        return {
+            Name: display_name,
+            Weights,
+            total_weight: Weights.reduce((acc, val) => acc + val, 0),
+            confirmation: group.confirmation
+        };
+    });
+    return items;
 }
 
 /**
