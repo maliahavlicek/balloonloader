@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'rest_framework',
 
 ]
 REZFLOW_API_KEY = os.environ.get("REZFLOW_API_KEY")
@@ -111,7 +112,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST FRAMEWORK PERMISSIONS
+REST_FRAMEWORK = {
 
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
