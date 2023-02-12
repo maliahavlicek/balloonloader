@@ -62,7 +62,7 @@ def GetRezFlowData(request):
     url = f'https://api.checkin.dev.rezflow.io/check-in/weights/{res_date}'
     headers = {
         'Company': company,
-        'Authorization': REZFLOW_API_KEY,
+        'Authorization': f'Basic {REZFLOW_API_KEY}',
         'Accept': 'application/json'
     }
 
