@@ -3,7 +3,7 @@ from .settings import REZFLOW_API_KEY
 import requests
 from django.http import JsonResponse
 import json
-from django.views.decorators.vary import vary_on_headers
+from django.views.decorators.clickjacking import xframe_options_sameorigin, xframe_options_exempt
 
 
 class Home(TemplateView):
@@ -48,6 +48,7 @@ class Home(TemplateView):
         return context
 
 
+@xframe_options_exempt
 def GetRezFlowData(request):
     """
     View get data from API vai curl
