@@ -111,7 +111,7 @@ function loadApiData(url, company, date) {
     const options = {
         headers: {
             "Content-type": "application/json",
-            'X-Requested-With': 'XMLHttpRequest',
+            "Access-Control-Allow-Origin": "*",
         },
         method: 'GET',
     };
