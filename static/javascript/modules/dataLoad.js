@@ -112,12 +112,9 @@ function loadApiData(url, company, date) {
     const options = {
         headers: {
             "Content-type": "application/json",
-            'X-CSRFToken': csrftoken,
             'X-Requested-With': 'XMLHttpRequest',
-            'WWW-Authenticate': 'Basic',
         },
         method: 'GET',
-        credentials: 'include',
     };
 
     fetch(api_url, options)
@@ -188,3 +185,10 @@ function applyManualEntryHandler() {
         main.classList.remove('hide');
     });
 }
+
+/*
+
+            'X-CSRFToken': csrftoken,
+            'X-Requested-With': 'XMLHttpRequest',
+            'WWW-Authenticate': 'Basic',
+ */
