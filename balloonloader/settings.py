@@ -34,7 +34,7 @@ else:
 
 DEBUG = False
 
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
