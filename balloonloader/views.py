@@ -55,8 +55,6 @@ def GetRezFlowData(request):
     """
     View get data from API vai curl
     """
-    print('in: GetREzFlowData')
-
     res_date = request.GET.get("date", None)
     company = request.GET.get("company", None)
 
@@ -66,9 +64,6 @@ def GetRezFlowData(request):
         'Authorization': f'Basic {REZFLOW_API_KEY}',
         'Accept': 'application/json'
     }
-
-
     result = requests.get(url, headers=headers)
-    print(result.text)
 
     return JsonResponse({'json': json.loads(result.text)})

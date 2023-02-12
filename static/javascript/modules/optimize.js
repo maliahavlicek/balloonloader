@@ -1,6 +1,5 @@
 function optimize(targets, pieces, vals, opts) {
     const sections = targets.length;
-    console.log(sections);
     const count = vals.length;
     let besties = null;
     let best = null;
@@ -31,7 +30,6 @@ function optimize(targets, pieces, vals, opts) {
         }
     };
     recurse(count);
-    console.log(besties);
     const choice = besties[Math.floor(Math.random() * besties.length)];
     pieces.forEach(function (piece, ix) {
         targets[choice[ix]].append(piece);

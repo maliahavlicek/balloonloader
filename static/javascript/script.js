@@ -115,11 +115,9 @@ function groupElementTouchMove(e) {
         if(Math.abs(e.touches[0].clientY - lastY) > touchSensitivity ) {
             if (e.touches[0].clientY < startY) {
                 window.scrollTo(e.touches[0].clientX, e.touches[0].clientY);
-                console.log(`Touch ABOVE: touch.clientY: ${e.touches[0].clientY} startY: ${startY} window.pageYOffset: ${window.pageYOffset} window.scrollY ${window.scrollY} e.target.getBounding.top ${e.target.getBoundingClientRect().top}`)
 
             } else if (e.touches[0].clientY > startY) {
                 window.scrollTo(e.touches[0].clientX, e.touches[0].clientY);
-                console.log("Touch BELOW viewport!")
             }
             // need to figure out translation
 
@@ -446,9 +444,7 @@ function applyGroupHandlers() {
 }
 
 async function disableOptimize(bool) {
-    console.log("disable", bool);
     for (const el of document.getElementsByClassName("optimize")) {
-        console.log("disabling", el);
         el.disabled = bool;
     }
     await new Promise(r => setTimeout(r, 100));

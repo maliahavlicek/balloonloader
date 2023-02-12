@@ -54,7 +54,6 @@ function loadData() {
     try {
         fr.onload = e => {
             const result = JSON.parse(e.target.result.toString());
-            console.log(result)
             const items = result.map(group => {
                 const Weights = group.guests.map(p => p.weight || 180);
                 return {
@@ -63,7 +62,6 @@ function loadData() {
                     total_weight: Weights.reduce((acc, val) => acc + val, 0),
                 };
             });
-            console.log(items);
             // now we can add the patrons based on this wonderful information
             createPatrons(items);
         };
@@ -121,7 +119,6 @@ function loadApiData(url, company, date) {
     fetch(api_url, options)
         .then(response => response.json())
         .then(json => {
-            console.log(json)
 
             const items = json.json.map(group => {
                 const Weights = group.guests.map(p => p.weight || 180);
