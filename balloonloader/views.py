@@ -52,6 +52,7 @@ def GetRezFlowData(request):
     """
     View get data from API vai curl
     """
+    print('in: GetREzFlowData')
 
     res_date = request.GET.get("date", None)
     company = request.GET.get("company", None)
