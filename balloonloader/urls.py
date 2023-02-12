@@ -19,5 +19,5 @@ from .views import Home, GetRezFlowData
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
-    path('rez-data/', GetRezFlowData, name='rez-data'),
+    path('rez-data', GetRezFlowData, name='rez-data'),
 ]
