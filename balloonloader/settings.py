@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'cloudinary',
 
 ]
-REZFLOW_API_KEY = os.environ.get("REZFLOW_API_KEY")
+REZFLOW_API_KEY = "Basic " + os.environ.get("REZFLOW_API_KEY")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,4 +139,3 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-X_FRAME_OPTIONS = 'SAMEORIGIN'
