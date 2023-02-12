@@ -4,7 +4,7 @@ import requests
 from django.http import JsonResponse
 import json
 from django.views.decorators.clickjacking import xframe_options_sameorigin, xframe_options_exempt
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 class Home(TemplateView):
@@ -49,7 +49,7 @@ class Home(TemplateView):
         return context
 
 
-@csrf_exempt
+@ensure_csrf_cookie
 def GetRezFlowData(request):
     """
     View get data from API vai curl

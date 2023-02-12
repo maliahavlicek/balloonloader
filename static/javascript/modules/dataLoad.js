@@ -102,6 +102,7 @@ function applyImportHandler() {
  * API to get weights for a date
  */
 function loadApiData(url, company, date) {
+    const csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
     let api_url = `${url.slice(0, -1)}?date=${date}&company=${company}`;
     if(!url.includes('http')){
          const domain = `${window.location.protocol}//${window.location.host}`;
@@ -111,6 +112,8 @@ function loadApiData(url, company, date) {
     const options = {
         headers: {
             "Content-type": "application/json",
+            'X-CSRFToken': csrftoken,
+            'X-Requested-With': 'XMLHttpRequest'
         },
         method: 'GET',
     };
