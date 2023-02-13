@@ -130,11 +130,16 @@ function loadApiData(url, company, date) {
 /** function to create passenger JSON **/
 function getGuests(data) {
     const items = data.map(group => {
-        const Weights = group.guests.map(p => p.weight || 180);
-        const display_name = group.guests[0].name.split(" ").length > 1 ? group.guests[0].name.split(" ").at(0) + " " + group.guests[0].name.split(" ").at(-1).substring(0, 1) : group.guests[0].name;
+        // remove 100% duplicated entries in a group
+        let uniqueGuests = [
+            ... new Map(group.guests.map((item)=> [item["name"] + group['weight'], item])).values(),
+        ]
+        const Weights = uniqueGuests.map(p => p.weight || 180);
+        const display_name = uniqueGuests[0].name.split(" ").length > 1 ? uniqueGuests[0].name.split(" ").at(0) + " " + uniqueGuests[0].name.split(" ").at(-1).substring(0, 1) : uniqueGuests[0].name;
         return {
             Name: display_name,
             Weights,
+            uniqueGuests,
             total_weight: Weights.reduce((acc, val) => acc + val, 0),
             confirmation: group.confirmation
         };
