@@ -40,7 +40,8 @@ ALLOWED_HOSTS = [
     'localhost',
     'balloonloader.herokuapp.com',
     'balloonloader.onrender.com',
-    'res.cloudinary.com'
+    'res.cloudinary.com',
+    '47.33.48.188'
 ]
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
