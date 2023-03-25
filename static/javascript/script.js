@@ -112,7 +112,7 @@ function groupElementTouchMove(e) {
         const progressX = startX - e.touches[0].clientX
         let progressY = startY - e.touches[0].clientY
 
-        if(Math.abs(e.touches[0].clientY - lastY) > touchSensitivity ) {
+        if (Math.abs(e.touches[0].clientY - lastY) > touchSensitivity) {
             if (e.touches[0].clientY < startY) {
                 window.scrollTo(e.touches[0].clientX, e.touches[0].clientY);
 
@@ -474,7 +474,14 @@ async function optimizeClick(num) {
     updateWeights();
     disableOptimize(false);
 }
-
+/*
+Utility function to help set date string
+ */
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
 
 /**
  * ReadyFunction: once DOM is complete
@@ -488,6 +495,8 @@ document.onreadystatechange = function () {
     let state = document.readyState;
     if (state == 'complete') {
 
+        /* initialize the date picker to today */
+       document.getElementById('date').value = new Date().toDateInputValue();
 
 
         applyImportHandler();
