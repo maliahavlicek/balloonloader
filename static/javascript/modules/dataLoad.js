@@ -158,12 +158,16 @@ function applyAPIHandler() {
         const date = document.getElementById('date').value;
         const company = document.getElementById('company').value;
         const url = document.getElementById('api_url').value;
+        const date_element = document.getElementById('date_picked');
+        const company_element = document.getElementById('company_picked');
         errorMessage.classList.add('hide');
         // dateInput.classList.remove('is-invalid');
         errorMessage.innerHTML = "";
         if (date.length > 0 && date.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/) && company) {
             const [yr, mo, dy] = date.split("-");
             loadApiData(url, company, [mo, dy, yr.substring(2)].join("-"));
+            date_element.innerHTML = date;
+            company_element.innerHTML = document.getElementById('company').selectedOptions[0].text;
         } else {
             errorMessage.classList.remove('hide');
             // dateInput.classList.add('is-invalid');
@@ -175,19 +179,6 @@ function applyAPIHandler() {
 
 }
 
-/**
- *  applyManualEntryHandler:
- *
- *  1. switch to loader view
- *  2. show manual entry modal
- */
-function applyManualEntryHandler() {
-    document.getElementById('manual').addEventListener('click', (e) => {
-        error.classList.add('hide');
-        upload.classList.add('hide');
-        main.classList.remove('hide');
-    });
-}
 
 /*
 
