@@ -474,14 +474,31 @@ async function optimizeClick(num) {
     updateWeights();
     disableOptimize(false);
 }
-/*
-Utility function to help set date string
+
+/**
+Utility function to help set date string to today
  */
 Date.prototype.toDateInputValue = (function() {
-    var local = new Date(this);
+    let local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0,10);
 });
+
+/**
+ * Preset company from local storage
+ */
+function preload_company() {
+    if (localStorage) {
+        try {
+            document.getElementById('company').value = localStorage.getItem('balloon_loader_default_company');
+        } catch(e){
+            // do nothing
+        }
+
+    }
+}
+
+
 
 /**
  * ReadyFunction: once DOM is complete
@@ -497,6 +514,9 @@ document.onreadystatechange = function () {
 
         /* initialize the date picker to today */
        document.getElementById('date').value = new Date().toDateInputValue();
+
+       /* initialize the company from local storage */
+        preload_company();
 
 
         applyImportHandler();

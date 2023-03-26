@@ -168,6 +168,7 @@ function applyAPIHandler() {
             loadApiData(url, company, [mo, dy, yr.substring(2)].join("-"));
             date_element.innerHTML = date;
             company_element.innerHTML = document.getElementById('company').selectedOptions[0].text;
+            localStorage.setItem('balloon_loader_default_company', company);
         } else {
             errorMessage.classList.remove('hide');
             // dateInput.classList.add('is-invalid');
