@@ -517,9 +517,8 @@ document.onreadystatechange = function () {
 
        /* initialize the company from local storage */
         preload_company();
-
-
         applyImportHandler();
+        applyManualEntryHandler();
         applyAPIHandler();
         applyPatronDropZoneHandlers();
         applyGroupHandlers();

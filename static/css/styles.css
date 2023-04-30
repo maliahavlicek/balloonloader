@@ -1,6 +1,18 @@
 :root {
     --translateX: 0;
     --translateY: 0;
+
+    --primary: #08bdbd;
+    --secondary: #FF4E44;
+    --tertiary: #FFFF08;
+    --success: #29BF12;
+    --info: #17a2b8;
+    --warning: #FFB217;
+    --danger: #F21B3F;
+    --light: #f8f9fa;
+    --dark: #696969;
+    --font-family-sans-serif: Raleway, Arial, sans-serif;
+    --font-family-monospace: 'Patrick Hand SC', Tahoma, serif;
 }
 
 html {
@@ -186,12 +198,14 @@ input[type=number] {
     align-items: center;
     margin-top: -4px;
 }
+
 .weight.group-weight {
     width: 50px;
     height: 50px;
     min-width: 50px;
 
 }
+
 .group.person .weight {
     display: flex;
     min-width: 45px;
@@ -365,9 +379,11 @@ input, select, textarea {
     .flight {
         grid-template-columns: repeat(2, minmax(4rem, 1fr)) 100px;
     }
+
     .flight-summary, .people-summary, .flights-summary {
         grid-template-columns:repeat(2, minmax(4rem, 1fr)) 100px;
     }
+
     .grand-totals {
         grid-template-columns: auto 100px;
     }

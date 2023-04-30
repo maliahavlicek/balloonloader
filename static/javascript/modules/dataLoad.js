@@ -120,9 +120,9 @@ function loadApiData(url, company, date) {
             createPatrons(items);
         })
         .catch(err => {
-            const errorMessage = document.querySelector('.api-error');
-            errorMessage.classList.remove('hide');
-            errorMessage.innerHTML= `API ERROR: ${err}`
+            const errorMessageContainer = document.querySelector('.api-error');
+            errorMessageContainer.classList.remove('hide');
+            document.querySelector('.api-error-message').innerHTML= `API ERROR: ${err}`
         });
 
 }
@@ -162,7 +162,7 @@ function applyAPIHandler() {
         const company_element = document.getElementById('company_picked');
         errorMessage.classList.add('hide');
         // dateInput.classList.remove('is-invalid');
-        errorMessage.innerHTML = "";
+        document.querySelector('.api-error-message').innerHTML = "";
         if (date.length > 0 && date.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/) && company) {
             const [yr, mo, dy] = date.split("-");
             loadApiData(url, company, [mo, dy, yr.substring(2)].join("-"));
@@ -172,7 +172,7 @@ function applyAPIHandler() {
         } else {
             errorMessage.classList.remove('hide');
             // dateInput.classList.add('is-invalid');
-            errorMessage.innerHTML = "All fields must be filled out.";
+            document.querySelector('.api-error-message').innerHTML = "All fields must be filled out.";
         }
 
     });
@@ -181,9 +181,16 @@ function applyAPIHandler() {
 }
 
 
-/*
-
-            'X-CSRFToken': csrftoken,
-            'X-Requested-With': 'XMLHttpRequest',
-            'WWW-Authenticate': 'Basic',
+/**
+ *  applyManualEntryHandler:
+ *
+ *  1. switch to loader view
+ *  2. show manual entry modal
  */
+function applyManualEntryHandler() {
+    document.getElementById('manual').addEventListener('click', (e) => {
+        error.classList.add('hide');
+        upload.classList.add('hide');
+        main.classList.remove('hide');
+    });
+}
