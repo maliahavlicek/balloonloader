@@ -5,11 +5,11 @@ function createPatrons(items) {
     items.forEach((group, index) => {
         const name = group.Name;
         const total_weight = group.total_weight;
-        const weights = group.Weights;
+        const guests = group.uniqueGuests;
 
         let new_group = `<div class="group guest group-${index + 1} d-flex flex-column" draggable="true" data-group_number="${index + 1}"style="--translateX:0; --translateY:0;" draggable="true" >` +
             `<div class="group-name" data-group-name="${name}">` +
-            `<span class="count">${weights.length}</span>` +
+            `<span class="count">${guests.length}</span>` +
             `<span>-</span>` +
             `<span class="name">${name}</span>` +
             `</div>` +
@@ -17,10 +17,12 @@ function createPatrons(items) {
             `<div class="weight group-weight">${total_weight}</div>` +
             `<div class="details d-block">`;
 
-        weights.forEach((weight) => {
+        guests.forEach((guest) => {
 
-            new_group += `<div class="person group group-${index + 1} d-flex flex-row" data-weight="${weight}" data-count="1" data-group_number="${index + 1}" data-name="${name}" draggable="true" style="--translateX:0;--translateY:0;">` +
-                `<div class="weight">${weight}</div>` +
+            new_group += `<div class="person group group-${index + 1} d-flex flex-row" data-weight="${guest.weight}" data-count="1" data-group_number="${index + 1}" data-name="${name}"  data-person="${guest.name}" draggable="true" style="--translateX:0;--translateY:0;">` +
+                `<div class="edit hide"><i class="fa-solid fa-pen-to-square"></i></div>` +
+                `<div class="weight">${guest.weight}</div>` +
+                `<div class="guest-name">${guest.name}</div>` +
                 `</div>`;
 
         });
@@ -79,7 +81,9 @@ function applyImportHandler() {
         if (status?.status === 'OK') {
             error.classList.add('hide');
             upload.classList.add('hide');
-            main.classList.remove('hide');
+            passengerList.classList.remove('hide');
+            stepLabel.innerHTML='PASSENGER LIST: ';
+            addPatronButton.classList.remove('hide');
         } else {
             error.classList.remove('hide');
             error.innerHTML = `<div><p><strong>Error: </strong>${status.error}</p><p>Expected JSON file</p>`;
@@ -115,7 +119,9 @@ function loadApiData(url, company, date) {
             const items = getGuests(json.json) ;
             // hide input buttons and show data panels
             upload.classList.add('hide');
-            main.classList.remove('hide');
+            passengerList.classList.remove('hide');
+            stepLabel.innerHTML="PASSENGER LIST: "
+            addPatronButton.classList.remove('hide');
             // now we can add the patrons based on this wonderful information
             createPatrons(items);
         })
@@ -191,6 +197,8 @@ function applyManualEntryHandler() {
     document.getElementById('manual').addEventListener('click', (e) => {
         error.classList.add('hide');
         upload.classList.add('hide');
-        main.classList.remove('hide');
+        passengerList.classList.remove('hide');
+        stepLabel.innerHTML='PASSENGER LIST:'
+        addPatronButton.classList.remove('hide');
     });
 }

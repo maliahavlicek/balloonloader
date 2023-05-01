@@ -12,7 +12,6 @@
     <script src="https://kit.fontawesome.com/e5fb00b6b9.js" crossorigin="anonymous"></script>
     <!-- own styles -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/globals.css' %}" type="text/x-scss">
     <meta name="description"
           content="Balloon Loader helps automate weight distribution for loading hot air balloon rides based on customer's weights and booked groups of customers">
 
@@ -26,20 +25,26 @@
 <header>
 
     <!-- Navigation -->
-    <nav class="navbar fixed">
+    <nav class="navbar custom-nav fixed">
         <div class="container container-fluid">
-            <!-- Logo -->
-            <h1 class="mx-auto">BALLOON BALANCE <span class="text-primary" id="date_picked"></span> <span id="company_picked"></span></h1>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/balloon.png' %}" alt="home" width="24" height="30">
+                <span class="logo">BALLOON BALANCE</span>
+
+            </a>
             <div class="d-flex">
-                <a class=" btn btn-sm btn-warning" aria-current="page" href="{% url 'home' %}">Start Over</a>
+                <a aria-current="page" href="{% url 'home' %}" aria-label="Start Over"><i
+                        class="fa-solid fa-arrows-rotate fa-2x"></i></a>
             </div>
         </div>
     </nav>
+
+
 </header>
 <!-- Main content -->
 <main>
     {% block content %}
-    {% endblock %}
+    {% endblock content %}
 </main>
 <!-- SCRIPT INCLUDES -->
 

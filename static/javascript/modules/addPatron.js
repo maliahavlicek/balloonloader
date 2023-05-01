@@ -1,11 +1,12 @@
 const myModal = document.getElementById('add-patron-modal')
 let guests_added = 0;
 
-const myInput = document.getElementById('weight');
+
 const weight_elm = document.getElementById('weight');
+const name_elm = document.getElementById('name');
 
 myModal.addEventListener('shown.bs.modal', () => {
-    myInput.focus();
+    name_elm.focus();
 })
 
 /* helper function to get list of weights */
@@ -38,7 +39,8 @@ function weights_list() {
         for (let i in list) {
 
             let item = `                     
-                     <div class="text-center border">${list[i].weight}</div>
+                      <div class="text-center border">${list[i].name}</div>
+                      <div class="text-center border">${list[i].weight}</div>
                      <div class="text-center border">
                       <button tabindex=0" id="${list[i].id}" class="weight-remove"><i class="fa-solid fa-trash-can"></i></button>
                      </div>
@@ -60,7 +62,8 @@ function weights_list() {
 
     }
     weight_elm.value = '';
-    weight_elm.focus();
+    name_elm.value = '';
+    name_elm.focus();
 
 }
 
@@ -81,12 +84,15 @@ function remove_weight(e) {
 function add_weight() {
     const list = get_weights();
     const new_value = weight_elm.value;
+    const new_name = name_elm.value;
+    name_elm.classList.remove('is-invalid');
     weight_elm.classList.remove('is-invalid');
-    if (new_value.match(/[1-9][0-9]{1,2}/)) {
+    if (new_name.length > 1 && new_value.match(/[1-9][0-9]{1,2}/)) {
         //stuff result into list
         list.push({
             'id': Math.floor(Date.now() / 1000),
             'weight': new_value,
+            'name': name_elm.value,
         });
         // set weights list value
         document.getElementById('weights-entered').value = JSON.stringify(list);
@@ -95,10 +101,16 @@ function add_weight() {
         weights_list();
 
     } else {
-        // it's not an integer
-        weight_elm.classList.add('is-invalid');
-        document.getElementById('feature-name').classList.remove('is-invalid');
-        weight_elm.focus();
+        if (!(new_value.match(/[1-9][0-9]{1,2}/))) {
+            // it's not an integer
+            weight_elm.classList.add('is-invalid');
+            weight_elm.focus();
+        }
+        if (new_name.length < 1) {
+            name_elm.classList.add('is-invalid');
+            name_elm.focus();
+
+        }
     }
 
 
@@ -114,20 +126,21 @@ function add_weight() {
  */
 function addPatron() {
     // get the weight and name values then create a new object
-    let name = document.getElementById('name').value;
-    if (name.length < 1) {
-        name = `Guest ${parseInt(guests_added) + 1}`;
-    }
+
     let weights = [];
     const new_weights = get_weights();
+    let group_name = new_weights[0].name;
+    if (group_name.length < 1) {
+        group_name = `Guest ${parseInt(guests_added) + 1}`;
+    }
     if (new_weights.length > 0) {
         // check for group of weights
-        weights = new_weights.map(({weight}) => weight);
+        weights = new_weights;
     }
     // check for weight entry being populated
     const new_weight = document.getElementById('weight').value;
-    if (new_weight.length > 0 && new_weight.match(/[1-9][0-9]{1,2}/)) {
-        weights.push(new_weight);
+    if (name_elm.value.length > 0 && new_weight.length > 0 && new_weight.match(/[1-9][0-9]{1,2}/)) {
+        weights.push({name: name_elm.value, weight:new_weight});
     }
 
     if (weights.length > 0) {
@@ -136,21 +149,23 @@ function addPatron() {
 
         let sum = 0;
         for (const weight of weights) {
-            sum += parseInt(weight);
+            sum += parseInt(weight.weight);
         }
         const group_no = document.querySelectorAll('.group:not(.person):not(.guest)').length + parseInt(guests_added) + 1;
 
         let persons = ``;
         for (const weight of weights) {
-            persons += `<div class="person group group-${group_no} d-flex flex-row" draggable="true" data-weight="${weight}" data-count="1" data-group_number="${group_no}" data-name="${name}" style="--translateX:0;--translateY:0;">` +
-                `<div class="weight">${weight}</div></div>`;
+            persons += `<div class="person group group-${group_no} d-flex flex-row" draggable="true" data-weight="${weight.weight}" data-count="1" data-group_number="${group_no}" data-name="${group_name}" data-person="${weight.name}" style="--translateX:0;--translateY:0;">` +
+                `<div class="edit hide"><i class="fa-solid fa-pen-to-square"></i></div>` +
+                `<div class="weight">${weight.weight}</div>` +
+                `<div class="guest-name">${weight.name}</div></div>`;
         }
 
         let new_element = `<div class="group guest group-${group_no} d-flex flex-column" draggable="true" data-weight="${sum}" data-group_number="${group_no}"style="--translateX:0; --translateY:0;" draggable="true" >` +
-            `<div class="group-name" data-group-name="${name}">` +
+            `<div class="group-name" data-group-name="${group_name}">` +
             `<span class="count">${weights.length}</span>` +
             `<span>-</span>` +
-            `<span class="name">${name}</span>` +
+            `<span class="name">${group_name}</span>` +
             `</div>` +
             `<div class="d-flex flex-row">` +
             `<div class="weight group-weight">${sum}</div>` +
