@@ -1,6 +1,19 @@
 :root {
     --translateX: 0;
     --translateY: 0;
+
+    --bs-primary: #08bdbd!important;
+    --bs-secondary: #FF4E44!important;
+    --bs-tertiary: #FFFF08!important;
+    --bs-success: #29BF12!important;
+    --bs-info: #17a2b8!important;
+    --bs-warning: #FFB217!important;
+    --bs-danger: #F21B3F!important;
+    --bs-light: #f8f9fa!important;
+    --bs-dark: #696969!important;
+    --bs-font-family-sans-serif: Raleway, Arial, sans-serif;
+    --bs-font-family-monospace: 'Patrick Hand SC', Tahoma, serif;
+    --bs-btn-bg: #1A9BD1!important;
 }
 
 html {
@@ -9,6 +22,18 @@ html {
 
 h1, h2, h3 {
     text-align: center;
+}
+
+nav.navbar.custom-nav, nav.navbar.custom-nav *{
+    background:var(--bs-primary)!important;
+    color: var(--bs-light)!important;
+    font-weight: bold;
+    font-size: 2.8rem;
+}
+
+
+.logo{
+    padding-right: 1.2rem;
 }
 
 .fs-1 {
@@ -176,9 +201,9 @@ input[type=number] {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    font-size: 22px;
+    font-size: 20px;
     color: #fff;
-    line-height: 42px;
+    line-height: 40px;
     text-align: center;
     background: #000;
     display: flex;
@@ -186,28 +211,38 @@ input[type=number] {
     align-items: center;
     margin-top: -4px;
 }
-.weight.group-weight {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
 
+.weight.group-weight {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    display: none;
 }
+
 .group.person .weight {
     display: flex;
-    min-width: 45px;
+    min-width: 38px;
     width: max-content;
     height: auto;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 16px;
     background: #052A90FF;
     border-radius: 0;
-    margin: -0.4rem;
-    padding: 0.2rem;
-    border: 1px solid white;
-    align-text: center;
+    margin: -0.2rem;
+    padding: 0.3rem;
     justify-content: center;
     align-items: center;
-    min-height: 42px;
+    min-height: 38px;
+}
+
+.group.person .guest-name{
+    min-height: 38px;
+    font-size: 14px;
+    line-height: 16px;
+    background: #052A90FF;
+    padding: 0.1rem;
+    color: white;
+    text-align: left;
 }
 
 .group {
@@ -223,9 +258,22 @@ input[type=number] {
 }
 
 .details .group {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
     border-bottom: none;
+    background: #052A90FF;
 }
+
+
+.person.group:before {
+    content: " ";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid white;
+}
+
 
 .group-details .weight {
     align-self: center;
@@ -323,7 +371,7 @@ input[type=number] {
 
 #weights-html {
     display: grid;
-    grid-template-columns: 100px 60px;
+    grid-template-columns: 150px 100px 60px;
     max-width: 80%;
 }
 
@@ -365,9 +413,11 @@ input, select, textarea {
     .flight {
         grid-template-columns: repeat(2, minmax(4rem, 1fr)) 100px;
     }
+
     .flight-summary, .people-summary, .flights-summary {
         grid-template-columns:repeat(2, minmax(4rem, 1fr)) 100px;
     }
+
     .grand-totals {
         grid-template-columns: auto 100px;
     }

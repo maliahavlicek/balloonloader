@@ -1,4 +1,46 @@
 const main = document.querySelector('.main');
+const manualManipulation = document.getElementById('manual-manipulation');
+const passengerList = document.getElementById('passenger-list');
+const stepLabel = document.getElementById('step');
+const addPatronButton = document.getElementById('add-patron-button');
+const flightJson = {
+    flight1: {
+        left: {
+            patrons: [],
+            totalWeight: 0,
+            weightDiff: '',
+            passengerCount: 0,
+        },
+        right: {
+            patrons: [],
+            totalWeight: 0,
+            weightDiff: '',
+            passengerCount: 0,
+        },
+        totalWeight: 0,
+        passengerCount: 0,
+    },
+    flight2: {
+        left: {
+            patrons: [],
+            totalWeight: 0,
+            weightDiff: '',
+            passengerCount: 0,
+        },
+        right: {
+            patrons: [],
+            totalWeight: 0,
+            weightDiff: '',
+            passengerCount: 0,
+        },
+        totalWeight: 0,
+        passengerCount: 0,
+    },
+    grandTotals: {
+        totalWeight: 0,
+        passengerCount: 0,
+    }
+}
 
 const colors = ['#eae4e9ff', '#fff1e6ff', '#fde2e4ff', '#fad2e1ff', '#e2ece9ff', '#bee1e6ff', '#f0efebff',
     '#dfe7fdff', '#cddafdff', '#dfd7fcff', '#f8b4c4ff', '#ffedc2ff', '#60fbd2ff', '#7cd5f3ff', '#8fdbf5ff', '#3dccc7ff'
@@ -150,6 +192,7 @@ function decoupleChild(moved_elem) {
         const name = moved_elem.dataset.name;
         const weight = moved_elem.dataset.weight;
         const group_no = moved_elem.dataset.group_number;
+        const person_name = moved_elem.dataset.person;
         let new_element = `<div class="group group-${group_no} d-flex flex-column" draggable="true" data-group_number="${group_no}" style="--translateX:0; --translateY:0;" draggable="true" >` +
             `<div class="group-name" data-group-name="${name}">` +
             `<span class="count">1</span>` +
@@ -160,7 +203,9 @@ function decoupleChild(moved_elem) {
             `<div class="weight group-weight">${weight}</div>` +
             `<div class="details d-block">` +
             `<div class="person group group-${group_no} d-flex flex-row" data-weight="${weight}" data-group_number="${group_no}" data-count="1" data-name="${name}" style="--translateX:0;--translateY:0;">` +
+            `<div class="edit hide"><i class="fa-solid fa-pen-to-square"></i></div>` +
             `<div class="weight">${weight}</div>` +
+            `<div class="guest-name">${person_name}</div>` +
             `</div></div></div></div>`;
 
         moved_elem.dataset.weight -= parseInt(weight);
@@ -285,6 +330,7 @@ function dragDropIntoFlightElement(e) {
 
 }
 
+
 /**
  * updateWeights: called after DOM manipulation of a group is done
  * AKA drag & drop or touch move
@@ -353,19 +399,27 @@ function updateWeights() {
     // update differences
     for (const elem of document.querySelectorAll('.diff-weight')) {
         elem.innerHTML = '';
-    }
-    ;
+    };
+    flightJson.flight1.left.weightDiff='';
+    flightJson.flight1.right.weightDiff='';
+    flightJson.flight2.left.weightDiff='';
+    flightJson.flight2.right.weightDiff='';
+
     const f1_diff = parseInt(document.querySelector('#f1-left').dataset.weight) - parseInt(document.querySelector('#f1-right').dataset.weight);
     const f2_diff = parseInt(document.querySelector('#f2-left').dataset.weight) - parseInt(document.querySelector('#f2-right').dataset.weight);
     if (f1_diff > 0) {
         document.querySelector('#flight-1 .left.diff-weight').innerHTML = `(${f1_diff})`;
+        flightJson.flight1.left.weightDiff = `(${f1_diff})`;
     } else if (f1_diff < 0) {
         document.querySelector('#flight-1 .right.diff-weight').innerHTML = `(${Math.abs(f1_diff)})`;
+        flightJson.flight1.right.weightDiff = `(${Math.abs(f1_diff)})`;
     }
     if (f2_diff > 0) {
         document.querySelector('#flight-2 .left.diff-weight').innerHTML = `(${f2_diff})`;
+        flightJson.flight2.left.weightDiff = `(${f2_diff})`;
     } else if (f2_diff < 0) {
         document.querySelector('#flight-2 .right.diff-weight').innerHTML = `(${Math.abs(f2_diff)})`;
+        flightJson.flight2.right.weightDiff = `(${Math.abs(f2_diff)})`;
     }
 
 
@@ -389,6 +443,32 @@ function updateWeights() {
     //update grand totals
     document.querySelector('.grand-total-weight').innerHTML = grand_total.toString();
     document.querySelector('.grand-total-count').innerHTML = grand_count.toString();
+
+    // Now update the flight manifest data
+    flightJson.flight1.left.totalWeight=document.getElementById('f1-left').dataset.weight;
+    flightJson.flight1.left.passengerCount=document.getElementById('f1-left').dataset.count;
+    flightJson.flight1.right.totalWeight=document.getElementById('f1-right').dataset.weight;
+    flightJson.flight1.right.passengerCount=document.getElementById('f1-right').dataset.count;
+    flightJson.flight1.totalWeight=document.querySelector('#flight-1 .total-weight').innerHTML;
+    flightJson.flight1.passengerCount=document.querySelector('#flight-1 .total-count').innerHTML;
+
+    flightJson.flight2.left.totalWeight=document.getElementById('f2-left').dataset.weight;
+    flightJson.flight2.left.passengerCount=document.getElementById('f2-left').dataset.count;
+    flightJson.flight2.right.totalWeight=document.getElementById('f2-right').dataset.weight;
+    flightJson.flight2.right.passengerCount=document.getElementById('f2-right').dataset.count;
+    flightJson.flight2.totalWeight=document.querySelector('#flight-2 .total-weight').innerHTML;
+    flightJson.flight2.passengerCount=document.querySelector('#flight-2 .total-count').innerHTML;
+
+
+    // const f1Left= document.querySelectorAll('#f1-left .group.guest')
+    // let groupName= f1Left.dataset.name
+    // let patrons=[]
+    // for
+
+    // passengerList.classList.add('hide');
+    // document.getElementById('flight-manifest').classList.remove('hide');
+
+
 
 
 }
@@ -473,6 +553,9 @@ async function optimizeClick(num) {
     optimize(targets, pieces, vals, opts);
     updateWeights();
     disableOptimize(false);
+
+    manualManipulation.classList.remove('hide');
+
 }
 
 /**
@@ -517,9 +600,8 @@ document.onreadystatechange = function () {
 
        /* initialize the company from local storage */
         preload_company();
-
-
         applyImportHandler();
+        applyManualEntryHandler();
         applyAPIHandler();
         applyPatronDropZoneHandlers();
         applyGroupHandlers();
