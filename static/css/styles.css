@@ -213,10 +213,10 @@ input[type=number] {
 }
 
 .weight.group-weight {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    display: none;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    font-size: 12px;
 }
 
 .group.person .weight {

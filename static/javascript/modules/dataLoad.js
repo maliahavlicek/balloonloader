@@ -140,7 +140,10 @@ function getGuests(data) {
         let uniqueGuests = [
             ... new Map(group.guests.map((item)=> [item["name"] + group['weight'], item])).values(),
         ]
-        const Weights = uniqueGuests.map(p => p.weight || 180);
+        const Weights = uniqueGuests.map(p => p.weight || 181);
+            uniqueGuests.forEach((guest, index) => {
+            uniqueGuests[index].weight=guest.weight || 181;
+        });
         const display_name = uniqueGuests[0].name.split(" ").length > 1 ? uniqueGuests[0].name.split(" ").at(0) + " " + uniqueGuests[0].name.split(" ").at(-1).substring(0, 1) : uniqueGuests[0].name;
         return {
             Name: display_name,
