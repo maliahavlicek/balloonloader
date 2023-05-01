@@ -467,7 +467,6 @@ function updateWeights() {
 
     // passengerList.classList.add('hide');
     // document.getElementById('flight-manifest').classList.remove('hide');
-    manualManipulation.classList.remove('hide');
 
 
 
@@ -554,6 +553,8 @@ async function optimizeClick(num) {
     optimize(targets, pieces, vals, opts);
     updateWeights();
     disableOptimize(false);
+
+    manualManipulation.classList.remove('hide');
 
 }
 

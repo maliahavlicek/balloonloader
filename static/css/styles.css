@@ -216,7 +216,7 @@ input[type=number] {
     width: 48px;
     height: 48px;
     min-width: 48px;
-
+    display: none;
 }
 
 .group.person .weight {
@@ -240,9 +240,9 @@ input[type=number] {
     font-size: 14px;
     line-height: 16px;
     background: #052A90FF;
-    padding: 0.15rem;
+    padding: 0.1rem;
     color: white;
-    margin-left: 6px;
+    text-align: left;
 }
 
 .group {
@@ -263,6 +263,7 @@ input[type=number] {
     background: #052A90FF;
 }
 
+
 .person.group:before {
     content: " ";
     position: absolute;
@@ -272,6 +273,7 @@ input[type=number] {
     bottom: 5px;
     border: 1px solid white;
 }
+
 
 .group-details .weight {
     align-self: center;
