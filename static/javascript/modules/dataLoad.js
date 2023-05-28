@@ -138,7 +138,7 @@ function getGuests(data) {
     const items = data.map(group => {
         // remove 100% duplicated entries in a group
         let uniqueGuests = [
-            ... new Map(group.guests.map((item)=> [item["name"] + group['weight'], item])).values(),
+            ... new Map(group.guests.map((item)=> [item["name"] + item['weight'] + item['minor'], item])).values(),
         ]
         const Weights = uniqueGuests.map(p => p.weight || 181);
             uniqueGuests.forEach((guest, index) => {

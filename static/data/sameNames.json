@@ -1,0 +1,21 @@
+[
+  {
+    "confirmation": "LTB11619",
+    "guests": [
+      {
+        "name": "Danya Bellamy",
+        "weight": 160,
+        "minor": false
+      },
+      {
+        "name": "Ashlee Fussell",
+        "weight": 150,
+        "minor": true
+      },
+      {
+        "name": "Ashlee Fussell",
+        "weight": 150,
+        "minor": true
+      }
+    ]
+  }]
