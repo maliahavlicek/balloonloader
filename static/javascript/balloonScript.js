@@ -605,6 +605,7 @@ document.onreadystatechange = function () {
         applyAPIHandler();
         applyPatronDropZoneHandlers();
         applyGroupHandlers();
+        applyAddPatronHandler();
 
         // add patron submit processing
 

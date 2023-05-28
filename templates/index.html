@@ -333,6 +333,14 @@
                 <div class="modal-body">
                     <form id="add-patron">
                         <div class="mb-3">
+                            <label for="group_names" class="form-label">Add to Group</label>
+                            <select class="form-select" aria-label="Select Group to add patrons to" id="group_names">
+                                <option value="" selected>New Group</option>
+                            </select>
+
+                            <div id="nameHelp" class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control form-control-lg" id="name">
                             <div id="nameHelp" class="form-text">Required.</div>
