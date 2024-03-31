@@ -1,2 +1,6 @@
 env.py
 .idea/*
+# Environments
+.env
+.venv*
+env/

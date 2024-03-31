@@ -4,6 +4,9 @@ const error = document.querySelector('.file-error');
 function createPatrons(items) {
     items.forEach((group, index) => {
         const name = group.Name;
+        if (name === "undefined") {
+            return;
+        }
         const total_weight = group.total_weight;
         const guests = group.uniqueGuests;
 
@@ -55,8 +58,9 @@ function loadData() {
 
     try {
         fr.onload = e => {
-            const result = JSON.parse(e.target.result.toString());;
-            const items = getGuests(result) ;
+            const result = JSON.parse(e.target.result.toString());
+            ;
+            const items = getGuests(result);
             // now we can add the patrons based on this wonderful information
             createPatrons(items);
         };
@@ -82,7 +86,7 @@ function applyImportHandler() {
             error.classList.add('hide');
             upload.classList.add('hide');
             passengerList.classList.remove('hide');
-            stepLabel.innerHTML='PASSENGER LIST: ';
+            stepLabel.innerHTML = 'PASSENGER LIST: ';
             addPatronButton.classList.remove('hide');
         } else {
             error.classList.remove('hide');
@@ -99,9 +103,9 @@ function applyImportHandler() {
 function loadApiData(url, company, date) {
     const csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
     let api_url = `${url.slice(0, -1)}?date=${date}&company=${company}`;
-    if(!url.includes('http')){
-         const domain = `${window.location.protocol}//${window.location.host}`;
-         api_url = `${domain}${url}?date=${date}&company=${company}`;
+    if (!url.includes('http')) {
+        const domain = `${window.location.protocol}//${window.location.host}`;
+        api_url = `${domain}${url}?date=${date}&company=${company}`;
     }
 
     const options = {
@@ -116,11 +120,11 @@ function loadApiData(url, company, date) {
     fetch(api_url, options)
         .then(response => response.json())
         .then(json => {
-            const items = getGuests(json.json) ;
+            const items = getGuests(json.json);
             // hide input buttons and show data panels
             upload.classList.add('hide');
             passengerList.classList.remove('hide');
-            stepLabel.innerHTML="PASSENGER LIST: "
+            stepLabel.innerHTML = "PASSENGER LIST: "
             addPatronButton.classList.remove('hide');
             // now we can add the patrons based on this wonderful information
             createPatrons(items);
@@ -128,21 +132,28 @@ function loadApiData(url, company, date) {
         .catch(err => {
             const errorMessageContainer = document.querySelector('.api-error');
             errorMessageContainer.classList.remove('hide');
-            document.querySelector('.api-error-message').innerHTML= `API ERROR: ${err}`
+            document.querySelector('.api-error-message').innerHTML = `API ERROR: ${err}`
         });
 
 }
 
 /** function to create passenger JSON **/
 function getGuests(data) {
-    const items = data.map(group => {
+    // limit data to objects with a key of guests
+    const cleaned_data = data.filter(item => item.hasOwnProperty('guests') && item.guests.length > 0);
+
+    const items = cleaned_data.map(group => {
         // remove 100% duplicated entries in a group
         let uniqueGuests = [
-            ... new Map(group.guests.map((item)=> [item["name"] + item['weight'] + item['minor'], item])).values(),
+            ...new Map(
+                group.guests
+                    .filter(item => item["name"] !== undefined)
+                    .map(item => [item["name"] + item['weight'] + item['minor'], item])
+            ).values(),
         ]
         const Weights = uniqueGuests.map(p => p.weight || 181);
-            uniqueGuests.forEach((guest, index) => {
-            uniqueGuests[index].weight=guest.weight || 181;
+        uniqueGuests.forEach((guest, index) => {
+            uniqueGuests[index].weight = guest.weight || 181;
         });
         const display_name = uniqueGuests[0].name.split(" ").length > 1 ? uniqueGuests[0].name.split(" ").at(0) + " " + uniqueGuests[0].name.split(" ").at(-1).substring(0, 1) : uniqueGuests[0].name;
         return {
@@ -201,7 +212,7 @@ function applyManualEntryHandler() {
         error.classList.add('hide');
         upload.classList.add('hide');
         passengerList.classList.remove('hide');
-        stepLabel.innerHTML='PASSENGER LIST:'
+        stepLabel.innerHTML = 'PASSENGER LIST:'
         addPatronButton.classList.remove('hide');
     });
 }
