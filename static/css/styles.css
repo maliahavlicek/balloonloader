@@ -170,7 +170,7 @@ aside {
 
 
 .group-name {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 0.2rem auto;
     text-align: left;
     display: block;
@@ -224,21 +224,21 @@ input[type=number] {
     min-width: 38px;
     width: max-content;
     height: auto;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 12px;
+    line-height: 14px;
     background: #052A90FF;
     border-radius: 0;
-    margin: -0.2rem;
-    padding: 0.3rem;
+    margin: -0.1rem;
+    padding: 0.1rem;
     justify-content: center;
     align-items: center;
-    min-height: 38px;
+    min-height: 30px;
 }
 
 .group.person .guest-name{
     min-height: 38px;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 12px;
+    line-height: 14px;
     background: #052A90FF;
     padding: 0.1rem;
     color: white;
@@ -258,7 +258,7 @@ input[type=number] {
 }
 
 .details .group {
-    margin: 0 0.5rem;
+    margin: 0 0.2rem;
     border-bottom: none;
     background: #052A90FF;
 }
