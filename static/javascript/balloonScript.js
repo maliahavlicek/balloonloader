@@ -51,6 +51,7 @@ let MOVING_ELEMENT = '';
 let startX, startY, previousY;
 const flight_elements = document.querySelectorAll('.drop-targets');
 let hovered_flight;
+let hovered_group_add;
 let lastY;
 let currentY;
 const touchSensitivity = 7; //touch sensitivity, I found between 4 and 7 to be good values.
@@ -148,6 +149,17 @@ function groupElementTouchMove(e) {
                 }
 
             }
+            if (el.classList.contains('group-add-drop-target')) {
+                if (typeof hovered_group_add == 'undefined') {
+                    el.classList.add('hovering');
+                    hovered_group_add = el;
+                }
+                if (hovered_group_add && hovered_group_add != el) {
+                    hovered_group_add.classList.remove('hovered');
+                    el.classList.add('hovering');
+                    hovered_group_add = el;
+                }
+            }
         }
 
         //get current y pos
@@ -200,7 +212,9 @@ function decoupleChild(moved_elem) {
             `<span class="name">${name}</span>` +
             `</div>` +
             `<div class="d-flex flex-row">` +
+            `<div class="d-flex flex-col">` +
             `<div class="weight group-weight">${weight}</div>` +
+            `<div class="group-add-drop-target" data-group_add="${group_no}"><i class="fa-solid fa-person-circle-plus"></i></div></div>` +
             `<div class="details d-block">` +
             `<div class="person group group-${group_no} d-flex flex-row" data-weight="${weight}" data-group_number="${group_no}" data-count="1" data-name="${name}" style="--translateX:0;--translateY:0;">` +
             `<div class="edit hide"><i class="fa-solid fa-pen-to-square"></i></div>` +
@@ -216,6 +230,55 @@ function decoupleChild(moved_elem) {
         return new_element
 
     } else return false;
+
+
+}
+
+/**
+ * moveToNewGroup
+ *
+ *  we need to restructure the HTML differently if the moved element is a group vs a person
+ * */
+function moveToNewGroup(moved_elem,destination_elem) {
+
+        const group_no = destination_elem.dataset.group_add;
+        const group_name = destination_elem.dataset.group-name;
+
+    if (moved_elem.classList.contains('person')) {
+        const weight = moved_elem.dataset.weight;
+        const person_name = moved_elem.dataset.person;
+        let new_element = `<div class="person group group-${group_no} d-flex flex-row" data-weight="${weight}" data-group_number="${group_no}" data-count="1" data-name="${group_name}" data-person="${person_name}" draggable="true" style="--translateX:0;--translateY:0;">` +
+            `<div class="edit hide"><i class="fa-solid fa-pen-to-square"></i></div>` +
+            `<div class="weight">${weight}</div>` +
+            `<div class="guest-name">${person_name}</div>` +
+            `</div>`;
+
+        moved_elem.dataset.weight -= parseInt(weight);
+        moved_elem.dataset.count--;
+        moved_elem.classList.add('delete-me');
+
+
+        return new_element
+
+    } else if (moved_elem.classList.contains('group')) {
+        const people_to_move = moved_elem.querySelectorAll('.person');
+        let new_element = '';
+        for (const person of people_to_move) {
+            const weight = person.dataset.weight;
+            const person_name = person.dataset.person;
+            new_element += `<div class="person group group-${group_no} d-flex flex-row" data-weight="${weight}" data-group_number="${group_no}" data-count="1"  data-name="${group_name}" draggable="true" data-person="${person_name}" style="--translateX:0;--translateY:0;">` +
+                `<div class="edit hide"><i class="fa-solid fa-pen-to-square"></i></div>` +
+                `<div class="weight">${weight}</div>` +
+                `<div class="guest-name">${person_name}</div>` +
+                `</div>`;
+        }
+
+        moved_elem.dataset.weight -= parseInt(weight);
+        moved_elem.dataset.count--;
+        moved_elem.classList.add('delete-me');
+        return new_element;
+    }
+    else return false;
 
 
 }
@@ -241,7 +304,10 @@ function groupElementTouchEnd(e) {
     MOVING_ELEMENT.style.setProperty('--translateY', '0');
     MOVING_ELEMENT.style.removeProperty('z-index');
 
-    const destination_element = hovered_flight;
+    let destination_element = hovered_flight;
+    if (hovered_group_add !== "undefined"){
+        destination_element = hovered_group_add;
+    }
     if (destination_element && destination_element.classList.contains('drop-targets')) {
 
         const new_elem = decoupleChild(MOVING_ELEMENT);
@@ -253,18 +319,40 @@ function groupElementTouchEnd(e) {
 
         updateWeights();
         applyGroupHandlers();
+        try {
+            hovered_flight.classList.remove('hovered');
+
+            MOVING_ELEMENT.parentElement.parentElement.parentElement.style.removeProperty('z-index');
+            MOVING_ELEMENT.parentElement.parentElement.parentElement.style.removeProperty('overflow');
+
+        } catch {
+            //do nothing timing issue might not realize hover is already off
+        }
+        hovered_flight = undefined;
+
+    } else if (destination_element && destination_element.classList.contains('group-add-drop-target')) {
+        const destination = destination_element.parentElement.parentElement.querySelector('.details');
+        const new_elem = moveToNewGroup(MOVING_ELEMENT, destination_element);
+        if (new_elem) {
+            destination.insertAdjacentHTML('beforeend', new_elem);
+
+
+            updateWeights();
+            applyGroupHandlers();
+            try {
+                hovered_group_add.classList.remove('hovering');
+
+                MOVING_ELEMENT.parentElement.parentElement.parentElement.style.removeProperty('z-index');
+                MOVING_ELEMENT.parentElement.parentElement.parentElement.style.removeProperty('overflow');
+
+            } catch {
+                //do nothing timing issue might not realize hover is already off
+            }
+        }
+        hovered_group_add = undefined;
 
     }
-    try {
-        hovered_flight.classList.remove('hovered');
 
-        MOVING_ELEMENT.parentElement.parentElement.parentElement.style.removeProperty('z-index');
-        MOVING_ELEMENT.parentElement.parentElement.parentElement.style.removeProperty('overflow');
-
-    } catch {
-        //do nothing timing issue might not realize hover is already off
-    }
-    hovered_flight = undefined;
 
 }
 
@@ -399,11 +487,12 @@ function updateWeights() {
     // update differences
     for (const elem of document.querySelectorAll('.diff-weight')) {
         elem.innerHTML = '';
-    };
-    flightJson.flight1.left.weightDiff='';
-    flightJson.flight1.right.weightDiff='';
-    flightJson.flight2.left.weightDiff='';
-    flightJson.flight2.right.weightDiff='';
+    }
+    ;
+    flightJson.flight1.left.weightDiff = '';
+    flightJson.flight1.right.weightDiff = '';
+    flightJson.flight2.left.weightDiff = '';
+    flightJson.flight2.right.weightDiff = '';
 
     const f1_diff = parseInt(document.querySelector('#f1-left').dataset.weight) - parseInt(document.querySelector('#f1-right').dataset.weight);
     const f2_diff = parseInt(document.querySelector('#f2-left').dataset.weight) - parseInt(document.querySelector('#f2-right').dataset.weight);
@@ -445,19 +534,19 @@ function updateWeights() {
     document.querySelector('.grand-total-count').innerHTML = grand_count.toString();
 
     // Now update the flight manifest data
-    flightJson.flight1.left.totalWeight=document.getElementById('f1-left').dataset.weight;
-    flightJson.flight1.left.passengerCount=document.getElementById('f1-left').dataset.count;
-    flightJson.flight1.right.totalWeight=document.getElementById('f1-right').dataset.weight;
-    flightJson.flight1.right.passengerCount=document.getElementById('f1-right').dataset.count;
-    flightJson.flight1.totalWeight=document.querySelector('#flight-1 .total-weight').innerHTML;
-    flightJson.flight1.passengerCount=document.querySelector('#flight-1 .total-count').innerHTML;
+    flightJson.flight1.left.totalWeight = document.getElementById('f1-left').dataset.weight;
+    flightJson.flight1.left.passengerCount = document.getElementById('f1-left').dataset.count;
+    flightJson.flight1.right.totalWeight = document.getElementById('f1-right').dataset.weight;
+    flightJson.flight1.right.passengerCount = document.getElementById('f1-right').dataset.count;
+    flightJson.flight1.totalWeight = document.querySelector('#flight-1 .total-weight').innerHTML;
+    flightJson.flight1.passengerCount = document.querySelector('#flight-1 .total-count').innerHTML;
 
-    flightJson.flight2.left.totalWeight=document.getElementById('f2-left').dataset.weight;
-    flightJson.flight2.left.passengerCount=document.getElementById('f2-left').dataset.count;
-    flightJson.flight2.right.totalWeight=document.getElementById('f2-right').dataset.weight;
-    flightJson.flight2.right.passengerCount=document.getElementById('f2-right').dataset.count;
-    flightJson.flight2.totalWeight=document.querySelector('#flight-2 .total-weight').innerHTML;
-    flightJson.flight2.passengerCount=document.querySelector('#flight-2 .total-count').innerHTML;
+    flightJson.flight2.left.totalWeight = document.getElementById('f2-left').dataset.weight;
+    flightJson.flight2.left.passengerCount = document.getElementById('f2-left').dataset.count;
+    flightJson.flight2.right.totalWeight = document.getElementById('f2-right').dataset.weight;
+    flightJson.flight2.right.passengerCount = document.getElementById('f2-right').dataset.count;
+    flightJson.flight2.totalWeight = document.querySelector('#flight-2 .total-weight').innerHTML;
+    flightJson.flight2.passengerCount = document.querySelector('#flight-2 .total-count').innerHTML;
 
 
     // const f1Left= document.querySelectorAll('#f1-left .group.guest')
@@ -467,8 +556,6 @@ function updateWeights() {
 
     // passengerList.classList.add('hide');
     // document.getElementById('flight-manifest').classList.remove('hide');
-
-
 
 
 }
@@ -487,6 +574,7 @@ function applyPatronDropZoneHandlers() {
         flight_element.addEventListener('dragleave', dragLeaveFlightElement);
         flight_element.addEventListener('drop', dragDropIntoFlightElement);
     }
+
 }
 
 /**
@@ -559,12 +647,12 @@ async function optimizeClick(num) {
 }
 
 /**
-Utility function to help set date string to today
+ Utility function to help set date string to today
  */
-Date.prototype.toDateInputValue = (function() {
+Date.prototype.toDateInputValue = (function () {
     let local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0,10);
+    return local.toJSON().slice(0, 10);
 });
 
 /**
@@ -574,13 +662,12 @@ function preload_company() {
     if (localStorage) {
         try {
             document.getElementById('company').value = localStorage.getItem('balloon_loader_default_company');
-        } catch(e){
+        } catch (e) {
             // do nothing
         }
 
     }
 }
-
 
 
 /**
@@ -596,9 +683,9 @@ document.onreadystatechange = function () {
     if (state == 'complete') {
 
         /* initialize the date picker to today */
-       document.getElementById('date').value = new Date().toDateInputValue();
+        document.getElementById('date').value = new Date().toDateInputValue();
 
-       /* initialize the company from local storage */
+        /* initialize the company from local storage */
         preload_company();
         applyImportHandler();
         applyManualEntryHandler();

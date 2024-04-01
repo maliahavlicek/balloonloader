@@ -1,0 +1,46 @@
+[
+  {
+    "confirmation": "LTB11837",
+    "guests": [
+      {
+        "name": "Bill Pierce",
+        "weight": 205,
+        "minor": false
+      },
+      {
+        "name": "Melody Pierce",
+        "weight": 140,
+        "minor": false
+      }
+    ]
+  },
+  {
+    "confirmation": "LTB11941",
+    "guests": []
+  },
+  {
+    "confirmation": "LTB11942",
+    "guests": [
+      {
+        "name": "Kathryn Fox",
+        "weight": 120,
+        "minor": false
+      }
+    ]
+  },
+  {
+    "confirmation": "LTB12086",
+    "guests": [
+      {
+        "name": "Alexa Morreale",
+        "weight": 130,
+        "minor": false
+      },
+      {
+        "name": "Artem Pasyechnyk",
+        "weight": 198,
+        "minor": false
+      }
+    ]
+  }
+]

@@ -17,7 +17,9 @@ function createPatrons(items) {
             `<span class="name">${name}</span>` +
             `</div>` +
             `<div class="d-flex flex-row">` +
+            `<div class="d-flex flex-col">` +
             `<div class="weight group-weight">${total_weight}</div>` +
+            `<div class="group-add-drop-target" data-group_add="${index + 1}"><i class="fa-solid fa-person-circle-plus"></i></div></div>` +
             `<div class="details d-block">`;
 
         guests.forEach((guest) => {

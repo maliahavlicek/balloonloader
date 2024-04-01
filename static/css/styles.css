@@ -368,6 +368,18 @@ input[type=number] {
     background: #eaffbc;
 }
 
+.flex-col
+{
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+i.fa-solid.fa-person-circle-plus {
+    font-size: 2.2rem;
+    border: 1px solid;
+    background: #ffc107;
+    padding: 0.2rem;
+}
 
 #weights-html {
     display: grid;

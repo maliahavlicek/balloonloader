@@ -197,7 +197,9 @@ function addPatron() {
                 `<span class="name">${group_name}</span>` +
                 `</div>` +
                 `<div class="d-flex flex-row">` +
+                `<div class="d-flex flex-col">`+
                 `<div class="weight group-weight">${sum}</div>` +
+                `<div class="group-add-drop-target" data-group_add="${group_no}"><i class="fa-solid fa-person-circle-plus"></i></div></div>` +
                 `<div class="details d-block">` +
                 persons +
                 `</div></div></div>`;
